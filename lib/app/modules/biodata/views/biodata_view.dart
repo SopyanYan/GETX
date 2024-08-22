@@ -8,6 +8,7 @@ class BiodataView extends GetView<BiodataController> {
 
   @override
   Widget build(BuildContext context) {
+    final BiodataController controller = Get.put(BiodataController());
     return Scaffold(
       appBar: AppBar(
         title: const Text('Formulir Biodata'),
@@ -69,7 +70,7 @@ class BiodataView extends GetView<BiodataController> {
                             value: 'Perempuan',
                             groupValue: controller.jenisKelamin.value,
                             onChanged: controller.setJenisKelamin,
-                            activeColor:  Color.fromARGB(255, 204, 249, 3),
+                            activeColor: Color.fromARGB(255, 204, 249, 3),
                           ),
                         ),
                       )),
@@ -148,7 +149,7 @@ class BiodataView extends GetView<BiodataController> {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12),
                     ),
-                    backgroundColor:  Color.fromARGB(255, 255, 0, 0),
+                    backgroundColor: Color.fromARGB(255, 255, 0, 0),
                   ),
                 ),
               ),
@@ -159,10 +160,3 @@ class BiodataView extends GetView<BiodataController> {
     );
   }
 }
-
-
-
-
-
-
-

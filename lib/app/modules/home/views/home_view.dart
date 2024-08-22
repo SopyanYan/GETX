@@ -21,14 +21,8 @@ class HomeView extends GetView<HomeController> {
               style: TextStyle(fontSize: 20),
             ),
           ),
-          ElevatedButton(
-            onPressed: () {
-            Get.toNamed('/counter');
-          },
-          child: Text("Cunter Page")
-          ),
         ],
-    ),
+      ),
     );
   }
 }
