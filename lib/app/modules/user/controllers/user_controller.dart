@@ -2,76 +2,76 @@ import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-import '../../../data/kategori_model.dart';
+import '../../../data/user_model.dart';
 import '../../..//utils/api.dart';
 
-class KategoriController extends GetxController {
-  var KategoriList = <Data>[].obs;
+class UserController extends GetxController {
+  var UserList = <DataUser>[].obs;
   var isLoading = true.obs;
 
-  final String baseUrl = '${BaseUrl.api}/kategori';
+  final String baseUrl = '${BaseUrl.api}/user';
 
   @override
   void onInit() {
-    fetchKategories();
+    fetchUseres();
     super.onInit();
   }
 
-  // Fetch kategori
-  void fetchKategories() async {
+  // Fetch User
+  void fetchUseres() async {
     try {
       isLoading(true);
       final response = await http.get(Uri.parse(baseUrl));
       if (response.statusCode == 200) {
         var jsonResponse = json.decode(response.body);
-        var kategori = Kategori.fromJson(jsonResponse);
-        KategoriList.value = kategori.data!;
+        var User = user.fromJson(jsonResponse);
+        UserList.value = User.data!;
       } else {
-        Get.snackbar('Error', 'Failed to load Kategori');
+        Get.snackbar('Error', 'Failed to load User');
       }
     } catch (e) {
-      Get.snackbar('Error', 'Failed to load Kategori: $e');
+      Get.snackbar('Error', 'Failed to load User: $e');
     } finally {
       isLoading(false);
     }
   }
 
-  // Add Kategori
-  Future<void> addKategori(Data newKategori) async {
+  // Add User
+  Future<void> addUser(DataUser newUser) async {
     try {
       isLoading(true);
       final response = await http.post(
         Uri.parse(baseUrl),
         headers: {'Content-Type': 'application/json'},
-        body: json.encode(newKategori.toJson()),
+        body: json.encode(newUser.toJson()),
       );
       if (response.statusCode == 201) {
-        fetchKategories();
+        fetchUseres();
         Get.back();
-        Get.snackbar('Success', 'Kategori added successfully');
+        Get.snackbar('Success', 'User added successfully');
       } else {
-        Get.snackbar('Error', 'Failed to add Kategori');
+        Get.snackbar('Error', 'Failed to add User');
       }
     } catch (e) {
-      Get.snackbar('Error', 'Failed to add Kategori: $e');
+      Get.snackbar('Error', 'Failed to add User: $e');
     } finally {
       isLoading(false);
     }
   }
 
-  // Update Kategori
-  Future<void> updateKategori(int id, Data updatedKategori) async {
+  // Update User
+  Future<void> updateUser(int id, DataUser updatedUser) async {
     try {
       isLoading(true);
       final Response = await http.put(
         Uri.parse('$baseUrl/$id'),
         headers: {'Content-Type': 'application/json'},
-        body: json.encode(updatedKategori.toJson()),
+        body: json.encode(updatedUser.toJson()),
       );
       if (Response.statusCode == 200) {
-        fetchKategories();
+        fetchUseres();
         Get.back();
-        Get.snackbar('Success', 'Kategori updated successfully');
+        Get.snackbar('Success', 'User updated successfully');
       } else {
         Get.snackbar('Error', 'Failed to update Kategori');
       }
@@ -83,12 +83,12 @@ class KategoriController extends GetxController {
   }
 
   // delete Kategori
-  Future<void> deleteKategori(int id) async {
+  Future<void> deleteUser(int id) async {
     try {
       isLoading(true);
       final response = await http.delete(Uri.parse('$baseUrl/$id'));
       if (response.statusCode == 200) {
-        fetchKategories();
+        fetchUseres();
         Get.snackbar('Success', 'Kategori deleted successfully');
       } else {
         Get.snackbar('Error', 'Failed to delete Kategori');
